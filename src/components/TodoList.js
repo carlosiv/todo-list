@@ -1,45 +1,54 @@
-import React from 'react';
+import React from "react";
 import moment from "moment";
 
-const TodoList = ({unfinishedTask, setStatus, deleteTodo}) => {
-  return <div className="container max-w-4xl mx-auto">
-  <h1 className="text-3xl font-bold text-center">Todo List</h1>
-  <ul className="space-y-4 mx-4 text-xl">
-    {unfinishedTask != "" ? (
-      unfinishedTask.map((task) => (
-        <div
-          key={task.id}
-          className="border-2 rounded-md shadow-lg p-2 m-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400"
-        >
-          <div className="text-xl ml-2 font-bold">
-            <li>{task.todo}</li>
-          </div>
-          <div className="flex space-x-3 p-2 font-bold">
-          <div><span className="text-base font-semibold">Status: </span> {task.status}</div>
-          <div>
-          <span className="text-base font-semibold">Date Added: </span>
-            {moment(task.createdAt).format("MMM DD, YYYY")}
-          </div>
-          <div>
-          <span className="text-base font-semibold">Date Due: </span> {moment(task.due).endOf("day").fromNow()}
-          </div>
-          </div>
-          <div className="space-x-4">
-            <button type='button' className="text-white px-4 w-auto h-10 bg-green-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none" onClick={()=>(setStatus(task.id,'Done'))}>
-              <svg
-                className="w-6 h-6 inline-block mr-1 mb-1"
-                fill="white"
-                version="1.1"
-                id="Capa_1"
-                x="0px"
-                y="0px"
-                viewBox="0 0 512 512"
-                enableBackground="new 0 0 512 512"
-                xmlSpace="preserve"
-              >
-                <g>
-                  <path
-                    d="M474.045,173.813c-4.201,1.371-6.494,5.888-5.123,10.088c7.571,23.199,11.411,47.457,11.411,72.1
+const TodoList = ({ unfinishedTask, setStatus, deleteTodo }) => {
+  return (
+    <div className="container max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold text-center">Todo List</h1>
+      <ul className="space-y-4 mx-4 text-xl">
+        {unfinishedTask != "" ? (
+          unfinishedTask.map((task) => (
+            <div
+              key={task.id}
+              className="border-2 rounded-md shadow-lg p-2 m-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400"
+            >
+              <div className="text-xl ml-2 font-bold">
+                <li>{task.todo}</li>
+              </div>
+              <div className="flex space-x-3 p-2 font-bold">
+                <div>
+                  <span className="text-base font-semibold">Status: </span>{" "}
+                  {task.status}
+                </div>
+                <div>
+                  <span className="text-base font-semibold">Date Added: </span>
+                  {moment(task.createdAt).format("MMM DD, YYYY")}
+                </div>
+                <div>
+                  <span className="text-base font-semibold">Date Due: </span>{" "}
+                  {moment(task.due).endOf("day").fromNow()}
+                </div>
+              </div>
+              <div className="space-x-4">
+                <button
+                  type="button"
+                  className="text-white px-4 w-auto h-10 bg-green-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+                  onClick={() => setStatus(task.id, "Done")}
+                >
+                  <svg
+                    className="w-6 h-6 inline-block mr-1 mb-1"
+                    fill="white"
+                    version="1.1"
+                    id="Capa_1"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 512 512"
+                    enableBackground="new 0 0 512 512"
+                    xmlSpace="preserve"
+                  >
+                    <g>
+                      <path
+                        d="M474.045,173.813c-4.201,1.371-6.494,5.888-5.123,10.088c7.571,23.199,11.411,47.457,11.411,72.1
 c0,62.014-24.149,120.315-68,164.166s-102.153,68-164.167,68s-120.316-24.149-164.167-68S16,318.014,16,256
 S40.149,135.684,84,91.833s102.153-68,164.167-68c32.889,0,64.668,6.734,94.455,20.017c28.781,12.834,54.287,31.108,75.81,54.315
 c3.004,3.239,8.066,3.431,11.306,0.425c3.24-3.004,3.43-8.065,0.426-11.306c-23-24.799-50.26-44.328-81.024-58.047
@@ -47,9 +56,9 @@ C317.287,15.035,283.316,7.833,248.167,7.833c-66.288,0-128.608,25.813-175.48,72.6
 c0,66.287,25.814,128.607,72.687,175.479c46.872,46.873,109.192,72.687,175.48,72.687s128.608-25.813,175.48-72.687
 c46.873-46.872,72.687-109.192,72.687-175.479c0-26.332-4.105-52.26-12.201-77.064
 C482.762,174.736,478.245,172.445,474.045,173.813z"
-                  />
-                  <path
-                    d="M504.969,83.262c-4.532-4.538-10.563-7.037-16.98-7.037s-12.448,2.499-16.978,7.034l-7.161,7.161
+                      />
+                      <path
+                        d="M504.969,83.262c-4.532-4.538-10.563-7.037-16.98-7.037s-12.448,2.499-16.978,7.034l-7.161,7.161
 c-3.124,3.124-3.124,8.189,0,11.313c3.124,3.123,8.19,3.124,11.314-0.001l7.164-7.164c1.51-1.512,3.52-2.344,5.66-2.344
 s4.15,0.832,5.664,2.348c1.514,1.514,2.348,3.524,2.348,5.663s-0.834,4.149-2.348,5.663L217.802,381.75
 c-1.51,1.512-3.52,2.344-5.66,2.344s-4.15-0.832-5.664-2.348L98.747,274.015c-1.514-1.514-2.348-3.524-2.348-5.663
@@ -59,29 +68,32 @@ c-3.124-3.123-8.189-3.123-11.313,0L212.142,342.129l-90.75-90.751c-4.533-4.538-10
 s-12.448,2.499-16.978,7.034c-4.536,4.536-7.034,10.565-7.034,16.977c0,6.412,2.498,12.441,7.034,16.978l107.728,107.728
 c4.532,4.538,10.563,7.037,16.98,7.037c6.417,0,12.448-2.499,16.977-7.033l275.847-275.848c4.536-4.536,7.034-10.565,7.034-16.978
 S509.502,87.794,504.969,83.262z"
-                  />
-                </g>
-              </svg>
+                      />
+                    </g>
+                  </svg>
 
-              <span>Done</span>
-            </button>
-            {task.status != "Done" && task.status != "Current" ? (
-              <button className="text-white px-4 w-auto h-10 bg-blue-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none" onClick={()=>(setStatus(task.id,'Current'))}>
-                <svg
-                  className="w-6 h-6 inline-block mr-1 mb-1"
-                  fill="white"
-                  version="1.1"
-                  id="Layer_1"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 511.999 511.999"
-                  enableBackground="new 0 0 512 512"
-                  xmlSpace="preserve"
-                >
-                  <g>
-                    <g>
-                      <path
-                        d="M511.999,102.871c0-7.743-3.015-15.022-8.49-20.496l-11.386-11.388c-5.475-5.475-12.755-8.49-20.498-8.49
+                  <span>Done</span>
+                </button>
+                {task.status !== "Done" && task.status !== "Current" ? (
+                  <button
+                    className="text-white px-4 w-auto h-10 bg-blue-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+                    onClick={() => setStatus(task.id, "Current")}
+                  >
+                    <svg
+                      className="w-6 h-6 inline-block mr-1 mb-1"
+                      fill="white"
+                      version="1.1"
+                      id="Layer_1"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 511.999 511.999"
+                      enableBackground="new 0 0 512 512"
+                      xmlSpace="preserve"
+                    >
+                      <g>
+                        <g>
+                          <path
+                            d="M511.999,102.871c0-7.743-3.015-15.022-8.49-20.496l-11.386-11.388c-5.475-5.475-12.755-8.49-20.498-8.49
   c-7.743,0-15.022,3.015-20.498,8.49l-53.653,53.653V67.463c0-5.632-4.567-10.199-10.199-10.199H10.199
   C4.566,57.263,0,61.831,0,67.463v377.074c0,5.632,4.566,10.199,10.199,10.199h377.075c5.632,0,10.199-4.567,10.199-10.199
   l-0.004-215.126l106.04-106.041C508.984,117.895,511.999,110.614,511.999,102.871z M377.075,434.337H20.398V77.663h356.676v67.376
@@ -91,75 +103,79 @@ S509.502,87.794,504.969,83.262z"
    M489.085,108.945l-28.09,28.091l-11.768-11.768L437.46,113.5l28.091-28.091c1.623-1.623,3.779-2.516,6.074-2.516
   c2.295,0,4.451,0.893,6.074,2.515l11.387,11.388c0,0.001,0,0.001,0.001,0.001c1.622,1.623,2.515,3.779,2.515,6.073
   C491.602,105.166,490.708,107.323,489.085,108.945z"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path
-                        d="M318.125,121.009h-9.724c-5.632,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h9.724
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M318.125,121.009h-9.724c-5.632,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h9.724
   c5.632,0,10.199-4.567,10.199-10.199C328.325,125.577,323.757,121.009,318.125,121.009z"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path
-                        d="M264.103,121.009H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h185.837
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M264.103,121.009H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h185.837
   c5.632,0,10.199-4.567,10.199-10.199C274.302,125.577,269.735,121.009,264.103,121.009z"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path
-                        d="M254.379,180.434H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h176.113
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M254.379,180.434H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h176.113
   c5.632,0,10.199-4.567,10.199-10.199C264.579,185.001,260.011,180.434,254.379,180.434z"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path
-                        d="M190.633,239.859H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h112.367
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M190.633,239.859H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h112.367
   c5.633,0,10.199-4.567,10.199-10.199C200.833,244.426,196.266,239.859,190.633,239.859z"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path
-                        d="M142.014,298.202H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h63.746
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M142.014,298.202H78.267c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h63.746
   c5.633,0,10.199-4.567,10.199-10.199C152.212,302.769,147.647,298.202,142.014,298.202z"
-                      />
-                    </g>
-                  </g>
-                </svg>
-                <span>On-Going</span>
-              </button>
-            ) : null}
+                          />
+                        </g>
+                      </g>
+                    </svg>
+                    <span>On-Going</span>
+                  </button>
+                ) : null}
 
-            <button className="text-white px-4 w-auto h-10 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none" onClick={()=>(deleteTodo(task.id))}>
-              <svg
-                className="w-6 h-6 inline-block mr-1 mb-1"
-                fill="white"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-              >
-                <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" />
-              </svg>
-              <span>Remove</span>
-            </button>
+                <button
+                  className="text-white px-4 w-auto h-10 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+                  onClick={() => deleteTodo(task.id)}
+                >
+                  <svg
+                    className="w-6 h-6 inline-block mr-1 mb-1"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                  >
+                    <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" />
+                  </svg>
+                  <span>Remove</span>
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="border-2 rounded-md shadow-lg justify-between p-2 m-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
+            <li>No Task To Complete</li>
           </div>
-        </div>
-      ))
-    ) : (
-      <div className="border-2 rounded-md shadow-lg justify-between p-2 m-2 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
-        <li>No Task To Complete</li>
-      </div>
-    )}
-  </ul>
-</div>
+        )}
+      </ul>
+    </div>
+  );
 };
 
 export default TodoList;
