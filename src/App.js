@@ -7,6 +7,8 @@ import TodoList from "./components/TodoList";
 import DoneTodo from "./components/DoneTodo";
 import TodoDashboard from "./components/TodoDashboard";
 import TodoForm from "./components/TodoForm";
+import Modal from "react-modal/lib/components/Modal";
+import CurrentTodo from "./components/CurrentTodo";
 
 //configure toast
 toast.configure();
@@ -20,7 +22,20 @@ const contextClass = {
   dark: "bg-white-600 font-gray-300",
 };
 
+const customStyles = {
+  content: {
+    backgroundColor: "#EEEEEE",
+  },
+  overlay: {
+    backgroundColor: "#2B2B2B",
+  },
+};
+
+Modal.setAppElement("#root");
+
 function App() {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
   const [newTask, setNewTask] = useState("");
   const [newTaskDue, setNewTaskDue] = useState(Date.now());
   const [todos, setTodos] = useState([
@@ -79,6 +94,34 @@ function App() {
     }
   }
 
+  function setStatus(id, status) {
+    const updatedTodo = todos
+      .filter((todo) => todo.id === id)
+      .map((task) => {
+        task.status = status;
+        task.finishedAt = Date.now();
+        return task;
+      });
+    notify(
+      `${updatedTodo[0].todo} is now ${status}!`,
+      "success",
+      "taskUpdateSuccess"
+    );
+    setTodos([...todos]);
+  }
+
+  function deleteTodo(id) {
+    const removedTask = todos.filter((todo) => todo.id === id);
+    const tasks = todos.filter((todo) => todo.id !== id);
+
+    notify(
+      `${removedTask[0].todo} is removed!`,
+      "warning",
+      "taskRemoveSuccess"
+    );
+    setTodos([...tasks]);
+  }
+
   const notify = (msg, type, id) => {
     switch (type) {
       case "error":
@@ -109,32 +152,13 @@ function App() {
     }
   };
 
-  function setStatus(id, status) {
-    const updatedTodo = todos
-      .filter((todo) => todo.id === id)
-      .map((task) => {
-        task.status = status;
-        task.finishedAt = Date.now();
-        return task;
-      });
-    notify(
-      `${updatedTodo[0].todo} is now ${status}!`,
-      "success",
-      "taskUpdateSuccess"
-    );
-    setTodos([...todos]);
+  function openModal(content) {
+    setIsOpen(true);
+    setModalContent(content);
   }
 
-  function deleteTodo(id) {
-    const removedTask = todos.filter((todo) => todo.id === id);
-    const tasks = todos.filter((todo) => todo.id !== id);
-
-    notify(
-      `${removedTask[0].todo} is removed!`,
-      "warning",
-      "taskRemoveSuccess"
-    );
-    setTodos([...tasks]);
+  function closeModal() {
+    setIsOpen(false);
   }
 
   const doneTask = todos.filter((task) => task.status === "Done");
@@ -159,6 +183,7 @@ function App() {
               unfinishedTask={unfinishedTask}
               onGoingTask={onGoingTask}
               doneTask={doneTask}
+              openModal={openModal}
             />
             <TodoForm
               newTask={newTask}
@@ -178,6 +203,15 @@ function App() {
         bodyClassName={() => "text-lg font-white font-med block p-3"}
         autoClose={5000}
       />
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Todo Modal"
+        style={customStyles}
+      >
+        <button onClick={closeModal}>close</button>
+        <CurrentTodo onGoingTasks={onGoingTask} />
+      </Modal>
     </div>
   );
 }
